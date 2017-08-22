@@ -73,6 +73,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <AdditionalIncludeDirectories>C:\Users\пользователь\Source\Repos\open-scrape-hopper-dll\yeux_v2\CTransform\pdiff;C:\Users\пользователь\Source\Repos\open-scrape-hopper-dll\yeux_v2\CTransform\hash;C:\Users\пользователь\Source\Repos\open-scrape-hopper-dll\yeux_v2\CTransform;C:\Users\пользователь\Source\Repos\open-scrape-hopper-dll\yeux_v2\CTablemap;C:\Users\пользователь\Source\Repos\open-scrape-hopper-dll\yeux_v2\CCritSec;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
