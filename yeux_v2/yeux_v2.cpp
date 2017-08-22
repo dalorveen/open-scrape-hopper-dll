@@ -156,6 +156,44 @@ bool CLobbyScraper::ReadRegion(HWND hwnd, const CString name, char* &result, int
 	return ret!=-4;
 }
 
+int CLobbyScraper::ReadRegionFromImage(HBITMAP source, const CString name, char* &result, int ofsx, int ofsy)
+{
+	RMapCI r_it = p_tablemap->r$()->find(name.GetString());
+
+	if (r_it == p_tablemap->r$()->end())
+		return -7;
+
+	STablemapRegion region = r_it->second;
+	RECT rt = { region.left, region.top + ofsy, region.right, region.bottom + ofsy };
+
+	HDC hdcSource = CreateCompatibleDC(NULL);
+	SelectObject(hdcSource, source);
+
+	int width = rt.right - rt.left + 1;
+	int height = rt.bottom - rt.top + 1;
+
+	HDC hdcDest = CreateCompatibleDC(hdcSource);
+	HBITMAP subBmp = CreateCompatibleBitmap(hdcSource, width, height);
+	SelectObject(hdcDest, subBmp);
+
+	BitBlt(
+		hdcDest, 0, 0, width, height,
+		hdcSource, rt.left, rt.top, SRCCOPY);
+
+	CTransform trans;
+	CString text;
+	CString separation;
+	COLORREF cr_avg;
+
+	int ret = trans.DoTransform(r_it, hdcDest, &text, &separation, &cr_avg);
+	strcpy_s(result, 256, text);
+
+	DeleteDC(hdcSource);
+	DeleteDC(hdcDest);
+
+	return ret;
+}
+
 
 //////////// Les appels possible de l'extérieur : 
 CLobbyScraper	scraper;
@@ -177,5 +215,10 @@ YEUX_V2_API int ReadRegion(HWND hwnd, char* name, char* &result, int offset)
 YEUX_V2_API void GetRegionPos(char* name, int& posleft, int& postop, int& posright, int& posbottom)
 {
 	scraper.GetRegionPos(name, posleft, postop, posright, posbottom);
+}
+
+YEUX_V2_API int ReadRegionFromImage(void* source, char* name, char* &result, int offset)
+{
+	return scraper.ReadRegionFromImage((HBITMAP)source, (CString)name, result, 0, offset);
 }
 

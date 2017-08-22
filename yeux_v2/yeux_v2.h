@@ -17,6 +17,7 @@ YEUX_V2_API int fnyeux_v2(void);
 YEUX_V2_API int OpenTablemap(char* filename);
 YEUX_V2_API int ReadRegion(HWND hwnd,char* name, char* & result, int offset);
 YEUX_V2_API void GetRegionPos(char* name, int& posleft, int& postop, int& posright, int& posbottom);
+YEUX_V2_API int ReadRegionFromImage(void* source, char* name, char* & result, int offset);
 
 }
 class CLobbyScraper
@@ -32,4 +33,5 @@ public:
 	bool ProcessRegion(RMapCI r_iter);
 	bool ReadRegion(HWND hwnd, const CString name, char* & result, int ofsx=0, int ofsy=0) ;
 	void GetRegionPos(const CString name, int& posl, int& post, int& posr, int& posb) ;
+	int ReadRegionFromImage(HBITMAP source, const CString name, char* &result, int ofsx, int ofsy);
 };
