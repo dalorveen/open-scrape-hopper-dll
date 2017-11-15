@@ -222,3 +222,8 @@ YEUX_V2_API int ReadRegionFromImage(void* source, char* name, char* &result, int
 	return scraper.ReadRegionFromImage((HBITMAP)source, (CString)name, result, 0, offset);
 }
 
+YEUX_V2_API int ReadSymbol(char* name, char* & result)
+{
+	return scraper.GetSymbol((CString)name, (CString&)result);
+}
+

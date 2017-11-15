@@ -18,7 +18,7 @@ YEUX_V2_API int OpenTablemap(char* filename);
 YEUX_V2_API int ReadRegion(HWND hwnd,char* name, char* & result, int offset);
 YEUX_V2_API void GetRegionPos(char* name, int& posleft, int& postop, int& posright, int& posbottom);
 YEUX_V2_API int ReadRegionFromImage(void* source, char* name, char* & result, int offset);
-
+YEUX_V2_API int ReadSymbol(char* name, char* & result);
 }
 class CLobbyScraper
 {
