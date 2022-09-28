@@ -13,23 +13,24 @@
 
 extern "C"
 {
-YEUX_V2_API int fnyeux_v2(void);
-YEUX_V2_API int OpenTablemap(char* filename);
-YEUX_V2_API int ReadRegion(HWND hwnd,char* name, char* & result, int offset);
-YEUX_V2_API void GetRegionPos(char* name, int& posleft, int& postop, int& posright, int& posbottom);
-
+	YEUX_V2_API int OpenTablemap(const wchar_t* filename);
+	YEUX_V2_API int ReadRegionFromHWND(HWND hWnd, const char* name, char*& result, int xOffset, int yOffset);
+	YEUX_V2_API int ReadRegionFromHDC(HDC hdc, const char* name, char*& result, int xOffset, int yOffset);
+	YEUX_V2_API void GetRegionPos(const char* name, int& posleft, int& postop, int& posright, int& posbottom);
+	YEUX_V2_API bool GetSymbol(const char* name, const char*& text);
 }
+
 class CLobbyScraper
 {
-public: 
+public:
 	char* ScrapeResult;
 public:
 	CLobbyScraper();
 	~CLobbyScraper();
 	bool Load(CString filename);
-  void UnloadTableMap();
-	bool GetSymbol(const CString name, CString& text) ;
-	bool ProcessRegion(RMapCI r_iter);
-	bool ReadRegion(HWND hwnd, const CString name, char* & result, int ofsx=0, int ofsy=0) ;
-	void GetRegionPos(const CString name, int& posl, int& post, int& posr, int& posb) ;
+	void UnloadTableMap();
+	bool GetSymbol(const CString name, CString& text);
+	bool ReadRegion(HWND hwnd, const CString name, char*& result, int xOffset, int yOffset);
+	bool ReadRegion(HDC hdc, const CString name, char*& result, int xOffset, int yOffset);
+	void GetRegionPos(const CString name, int& posl, int& post, int& posr, int& posb);
 };
